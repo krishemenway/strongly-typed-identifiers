@@ -17,8 +17,9 @@ publish:StronglyTyped.GuidIds:
     stage: publish
     when: manual
     script:
+        - "ls -laR"
         - "PackagePath=$(ls ./GuidIds | head -1)"
-        - "dotnet nuget push $PackagePath -k $NugetKey -s https://api.nuget.org/v3/index.json"
+        - "echo $PackagePath"
 
 build:StronglyTyped.GuidIds.Dapper:
     image: mcr.microsoft.com/dotnet/core/sdk:2.2
