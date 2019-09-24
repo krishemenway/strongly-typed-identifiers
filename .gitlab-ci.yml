@@ -2,7 +2,7 @@ stages:
     - build
     - publish
 
-build:StronglyTyped.GuidIds:
+build:GuidIds:
     image: mcr.microsoft.com/dotnet/core/sdk:2.2
     stage: build
     script:
@@ -12,16 +12,15 @@ build:StronglyTyped.GuidIds:
         paths:
             - GuidIds
 
-publish:StronglyTyped.GuidIds:
+publish:GuidIds:
     image: mcr.microsoft.com/dotnet/core/sdk:2.2
     stage: publish
     when: manual
     script:
-        - "ls -laR"
         - "PackagePath=$(ls ./GuidIds | head -1)"
-        - "echo $PackagePath"
+        - "dotnet nuget push $PackagePath -k $NugetKey"
 
-build:StronglyTyped.GuidIds.Dapper:
+build:GuidIds.Dapper:
     image: mcr.microsoft.com/dotnet/core/sdk:2.2
     stage: build
     script:
@@ -31,15 +30,15 @@ build:StronglyTyped.GuidIds.Dapper:
         paths:
             - GuidIds.Dapper
 
-publish:StronglyTyped.GuidIds.Dapper:
+publish:GuidIds.Dapper:
     image: mcr.microsoft.com/dotnet/core/sdk:2.2
     stage: publish
     when: manual
     script:
         - "PackagePath=$(ls ./GuidIds.Dapper | head -1)"
-        - "dotnet nuget push $PackagePath -k $NugetKey -s https://api.nuget.org/v3/index.json"
+        - "dotnet nuget push $PackagePath -k $NugetKey"
 
-build:StronglyTyped.IntIds:
+build:IntIds:
     image: mcr.microsoft.com/dotnet/core/sdk:2.2
     stage: build
     script:
@@ -49,15 +48,15 @@ build:StronglyTyped.IntIds:
         paths:
             - IntIds
 
-publish:StronglyTyped.IntIds:
+publish:IntIds:
     image: mcr.microsoft.com/dotnet/core/sdk:2.2
     stage: publish
     when: manual
     script:
         - "PackagePath=$(ls ./IntIds | head -1)"
-        - "dotnet nuget push $PackagePath -k $NugetKey -s https://api.nuget.org/v3/index.json"
+        - "dotnet nuget push $PackagePath -k $NugetKey"
 
-build:StronglyTyped.IntIds.Dapper:
+build:IntIds.Dapper:
     image: mcr.microsoft.com/dotnet/core/sdk:2.2
     stage: build
     script:
@@ -67,15 +66,15 @@ build:StronglyTyped.IntIds.Dapper:
         paths:
             - IntIds.Dapper
 
-publish:StronglyTyped.IntIds.Dapper:
+publish:IntIds.Dapper:
     image: mcr.microsoft.com/dotnet/core/sdk:2.2
     stage: publish
     when: manual
     script:
         - "PackagePath=$(ls ./IntIds.Dapper | head -1)"
-        - "dotnet nuget push $PackagePath -k $NugetKey -s https://api.nuget.org/v3/index.json"
+        - "dotnet nuget push $PackagePath -k $NugetKey"
 
-build:StronglyTyped.LongIds:
+build:LongIds:
     image: mcr.microsoft.com/dotnet/core/sdk:2.2
     stage: build
     script:
@@ -85,15 +84,15 @@ build:StronglyTyped.LongIds:
         paths:
             - LongIds
 
-publish:StronglyTyped.LongIds:
+publish:LongIds:
     image: mcr.microsoft.com/dotnet/core/sdk:2.2
     stage: publish
     when: manual
     script:
         - "PackagePath=$(ls ./LongIds | head -1)"
-        - "dotnet nuget push $PackagePath -k $NugetKey -s https://api.nuget.org/v3/index.json"
+        - "dotnet nuget push $PackagePath -k $NugetKey"
 
-build:StronglyTyped.LongIds.Dapper:
+build:LongIds.Dapper:
     image: mcr.microsoft.com/dotnet/core/sdk:2.2
     stage: build
     script:
@@ -103,15 +102,15 @@ build:StronglyTyped.LongIds.Dapper:
         paths:
             - LongIds.Dapper
 
-publish:StronglyTyped.LongIds.Dapper:
+publish:LongIds.Dapper:
     image: mcr.microsoft.com/dotnet/core/sdk:2.2
     stage: publish
     when: manual
     script:
         - "PackagePath=$(ls ./LongIds.Dapper | head -1)"
-        - "dotnet nuget push $PackagePath -k $NugetKey -s https://api.nuget.org/v3/index.json"
+        - "dotnet nuget push $PackagePath -k $NugetKey"
 
-build:StronglyTyped.StringIds:
+build:StringIds:
     image: mcr.microsoft.com/dotnet/core/sdk:2.2
     stage: build
     script:
@@ -121,15 +120,15 @@ build:StronglyTyped.StringIds:
         paths:
             - StringIds
 
-publish:StronglyTyped.StringIds:
+publish:StringIds:
     image: mcr.microsoft.com/dotnet/core/sdk:2.2
     stage: publish
     when: manual
     script:
         - "PackagePath=$(ls ./StringIds | head -1)"
-        - "dotnet nuget push $PackagePath -k $NugetKey -s https://api.nuget.org/v3/index.json"
+        - "dotnet nuget push $PackagePath -k $NugetKey"
 
-build:StronglyTyped.StringIds.Dapper:
+build:StringIds.Dapper:
     image: mcr.microsoft.com/dotnet/core/sdk:2.2
     stage: build
     script:
@@ -139,10 +138,10 @@ build:StronglyTyped.StringIds.Dapper:
         paths:
             - StringIds.Dapper
 
-publish:StronglyTyped.StringIds.Dapper:
+publish:StringIds.Dapper:
     image: mcr.microsoft.com/dotnet/core/sdk:2.2
     stage: publish
     when: manual
     script:
         - "PackagePath=$(ls ./StringIds.Dapper | head -1)"
-        - "dotnet nuget push $PackagePath -k $NugetKey -s https://api.nuget.org/v3/index.json"
+        - "dotnet nuget push $PackagePath -k $NugetKey"
