@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Dapper" Version="2.0.4" />
+    <PackageReference Include="Microsoft.AspNetCore" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="2.2.0" />
+    <PackageReference Include="Npgsql" Version="4.0.10" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\StronglyTyped.GuidIds.Dapper\StronglyTyped.GuidIds.Dapper.csproj" />
+    <ProjectReference Include="..\StronglyTyped.GuidIds\StronglyTyped.GuidIds.csproj" />
+    <ProjectReference Include="..\StronglyTyped.IntIds.Dapper\StronglyTyped.IntIds.Dapper.csproj" />
+    <ProjectReference Include="..\StronglyTyped.IntIds\StronglyTyped.IntIds.csproj" />
+    <ProjectReference Include="..\StronglyTyped.LongIds.Dapper\StronglyTyped.LongIds.Dapper.csproj" />
+    <ProjectReference Include="..\StronglyTyped.LongIds\StronglyTyped.LongIds.csproj" />
+    <ProjectReference Include="..\StronglyTyped.StringIds.Dapper\StronglyTyped.StringIds.Dapper.csproj" />
+    <ProjectReference Include="..\StronglyTyped.StringIds\StronglyTyped.StringIds.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Settings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

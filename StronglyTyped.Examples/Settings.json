@@ -1,0 +1,10 @@
+﻿{
+	"WebPort": 8001,
+
+	"DatabaseHost": "localhost",
+	"DatabasePort": 5433,
+
+	"DatabaseName": "notconfigured",
+	"DatabaseUser": "notconfigured",
+	"DatabasePassword": "notconfigured"
+}
