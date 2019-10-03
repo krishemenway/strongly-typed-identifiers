@@ -16,7 +16,7 @@ namespace StronglyTyped.LongIds.Dapper
 			parameter.Value = value.Value;
 		}
 
-		public static void RegisterId()
+		public static void Register()
 		{
 			AddTypeHandler(new DapperTypeHandler<T>());
 		}
