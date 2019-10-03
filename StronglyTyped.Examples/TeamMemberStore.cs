@@ -1,24 +1,26 @@
 ﻿using Dapper;
 using System.Collections.Generic;
 using System.Linq;
-using IntIds = StronglyTyped.IntIds;
-using GuidIds = StronglyTyped.GuidIds;
+using Int = StronglyTyped.IntIds;
+using Guid = StronglyTyped.GuidIds;
+using Long = StronglyTyped.LongIds;
 
 namespace ExampleService
 {
 	public interface ITeamMemberStore
 	{
-		IReadOnlyList<Person> FindTeamMembers(IntIds.Id<Team> teamId);
+		IReadOnlyList<Person> FindTeamMembers(Int.Id<Team> teamId);
 	}
 
 	public class TeamMemberStore : ITeamMemberStore
 	{
-		public IReadOnlyList<Person> FindTeamMembers(IntIds.Id<Team> teamId)
+		public IReadOnlyList<Person> FindTeamMembers(Int.Id<Team> teamId)
 		{
 			using (var connection = Database.CreateConnection())
 			{
 				const string sql = @"
 					SELECT
+						tm.team_member_id as teammemberid,
 						tm.team_id as teamid,
 						p.person_id as personid,
 						p.first_name as firstname,
@@ -48,10 +50,17 @@ namespace ExampleService
 
 		public class TeamMemberRecord
 		{
-			public IntIds.Id<Team> TeamId { get; set; }
-			public GuidIds.Id<Person> PersonId { get; set; }
+			public Long.Id<TeamMember> TeamMemberId { get; set; }
+
+			public Int.Id<Team> TeamId { get; set; }
+			public Guid.Id<Person> PersonId { get; set; }
+
 			public string FirstName { get; set; }
 			public string LastName { get; set; }
+		}
+
+		public struct TeamMember
+		{
 		}
 	}
 }
