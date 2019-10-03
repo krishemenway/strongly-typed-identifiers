@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace ExampleService
 {
-	internal class Database
+	internal static class Database
 	{
 		internal static IDbConnection CreateConnection()
 		{
@@ -16,7 +16,7 @@ namespace ExampleService
 			return connection;
 		}
 
-		private static string CreateConnectionString()
+		internal static string CreateConnectionString()
 		{
 			var connectionParams = new Dictionary<string, string>
 				{

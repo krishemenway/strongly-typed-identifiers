@@ -1,4 +1,5 @@
-﻿{
+{
+	"UseEF": true,
 	"WebPort": 8001,
 
 	"DatabaseHost": "localhost",
