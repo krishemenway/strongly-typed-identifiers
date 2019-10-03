@@ -9,23 +9,29 @@ namespace StronglyTyped.LongIds
 		long Value { get; }
 	}
 
+	/// <summary>Represents a long identifer for the specified type</summary>
+	/// <typeparam name="TModel">Type the identifier is for (e.g. Person, Team)</typeparam>
 	[TypeConverter(typeof(IdTypeConverter))]
 	[JsonConverter(typeof(IdJsonConverter))]
-	public struct Id<T> : ILongId, IEquatable<Id<T>>, IComparable<Id<T>>
+	public struct Id<TModel> : ILongId, IEquatable<Id<TModel>>, IComparable<Id<TModel>>
 	{
+		/// <summary>Create new identifier with value</summary>
+		/// <param name="value">Identifier value as long</param>
 		public Id(long value)
 		{
 			Value = value;
 		}
 
-		public static Id<T> NewId()
+		/// <summary>Creates a new identifier using an incrementing static long value. Probably only want to use this for testing purposes.</summary>
+		/// <returns>New identifier generated from an incrementing static long value<returns>
+		public static Id<TModel> NewId()
 		{
-			return new Id<T>(++LastGeneratedId);
+			return new Id<TModel>(++LastGeneratedId);
 		}
 
 		public override bool Equals(object otherObj)
 		{
-			return otherObj is Id<T> otherId && Value.Equals(otherId.Value);
+			return otherObj is Id<TModel> otherId && Value.Equals(otherId.Value);
 		}
 
 		public override int GetHashCode()
@@ -38,37 +44,37 @@ namespace StronglyTyped.LongIds
 			return Value.ToString();
 		}
 
-		public bool Equals(Id<T> other)
+		public bool Equals(Id<TModel> other)
 		{
 			return Value.Equals(other.Value);
 		}
 
-		public int CompareTo(Id<T> other)
+		public int CompareTo(Id<TModel> other)
 		{
 			return Value.CompareTo(other.Value);
 		}
 
-		public static explicit operator long(Id<T> id)
+		public static explicit operator long(Id<TModel> id)
 		{
 			return id.Value;
 		}
 
-		public static explicit operator Id<T>(long id)
+		public static explicit operator Id<TModel>(long id)
 		{
-			return new Id<T>(id);
+			return new Id<TModel>(id);
 		}
 
-		public static explicit operator Id<T>(string id)
+		public static explicit operator Id<TModel>(string id)
 		{
-			return new Id<T>(long.Parse(id));
+			return new Id<TModel>(long.Parse(id));
 		}
 
-		public static bool operator ==(Id<T> a, Id<T> b)
+		public static bool operator ==(Id<TModel> a, Id<TModel> b)
 		{
 			return a.Value.Equals(b.Value);
 		}
 
-		public static bool operator !=(Id<T> a, Id<T> b)
+		public static bool operator !=(Id<TModel> a, Id<TModel> b)
 		{
 			return !a.Value.Equals(b.Value);
 		}
