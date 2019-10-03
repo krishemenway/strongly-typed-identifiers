@@ -23,7 +23,6 @@ namespace ExampleService
 		{
 			if (Program.Settings.GetValue<bool>("UseEF"))
 			{
-				Id<Person>.NewId();
 				using (var context = new EntityFrameworkContext())
 				{
 					person = context.Person.Select(CreatePerson).SingleOrDefault(x => x.PersonId == personId);
