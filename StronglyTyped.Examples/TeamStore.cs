@@ -28,11 +28,10 @@ namespace ExampleService
 			{
 				const string sql = @"
 					SELECT
-						team_id as team,
-						first_name as firstname,
-						last_name as lastname
+						team_id as teamid,
+						name
 					FROM
-						public.person
+						public.team
 					WHERE
 						team_id = @teamId";
 
