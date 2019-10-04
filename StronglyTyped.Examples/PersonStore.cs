@@ -16,7 +16,7 @@ namespace ExampleService
 	{
 		static PersonStore()
 		{
-			DapperTypeHandler<Person>.Register();
+			TypeHandlerForIdOf<Person>.Register();
 		}
 
 		public bool TryFind(Id<Person> personId, out Person person)

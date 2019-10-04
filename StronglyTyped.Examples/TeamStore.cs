@@ -14,7 +14,7 @@ namespace ExampleService
 	{
 		static TeamStore()
 		{
-			DapperTypeHandler<Team>.Register();
+			TypeHandlerForIdOf<Team>.Register();
 		}
 
 		public TeamStore(ITeamMemberStore teamMemberStore = null)
