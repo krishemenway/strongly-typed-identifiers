@@ -9,6 +9,7 @@ namespace StronglyTyped.IntIds
 	{
 		public IdTypeConverter(Type idType)
 		{
+			_idType = idType;
 			_idTypeConstructor = idType.GetConstructor(new[] { typeof(int) });
 		}
 
@@ -19,18 +20,16 @@ namespace StronglyTyped.IntIds
 
 		public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
 		{
-			int convertedValue;
-
 			if (value is string valueAsString)
 			{
-				convertedValue = int.Parse(valueAsString);
+				return ConvertFromInt(int.Parse(valueAsString));
 			}
-			else
+			else if (value is int valueAsInt)
 			{
-				convertedValue = (int)value;
+				return ConvertFromInt(valueAsInt);
 			}
 
-			return _idTypeConstructor.Invoke(new object[] { convertedValue });
+			throw new NotSupportedException($"Tried to convert from {value.GetType()} to Id<{_idType}> but not supported");
 		}
 
 		public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)
@@ -53,6 +52,12 @@ namespace StronglyTyped.IntIds
 			throw new NotSupportedException($"Cannot convert to type {destinationType}");
 		}
 
+		private object ConvertFromInt(int value)
+		{
+			return _idTypeConstructor.Invoke(new object[] { value });
+		}
+
+		private readonly Type _idType;
 		private readonly ConstructorInfo _idTypeConstructor;
 	}
 }

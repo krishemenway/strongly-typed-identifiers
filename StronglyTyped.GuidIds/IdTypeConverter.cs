@@ -9,17 +9,27 @@ namespace StronglyTyped.GuidIds
 	{
 		public IdTypeConverter(Type idType)
 		{
+			_idType = idType;
 			_idTypeConstructor = idType.GetConstructor(new[] { typeof(Guid) });
 		}
 
 		public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
 		{
-			return sourceType == typeof(string);
+			return sourceType == typeof(string) || sourceType == typeof(Guid);
 		}
 
 		public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
 		{
-			return _idTypeConstructor.Invoke(new object[] { Guid.Parse((string)value) });
+			if (value is string valueAsString)
+			{
+				return ConvertFromGuid(Guid.Parse(valueAsString));
+			}
+			else if (value is Guid valueAsGuid)
+			{
+				return ConvertFromGuid(valueAsGuid);
+			}
+
+			throw new NotSupportedException($"Tried to convert from {value.GetType()} to Id<{_idType}> but not supported");
 		}
 
 		public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)
@@ -33,15 +43,20 @@ namespace StronglyTyped.GuidIds
 			{
 				return ((IGuidId)value).Value.ToString();
 			}
-
-			if (destinationType == typeof(Guid))
+			else if (destinationType == typeof(Guid))
 			{
 				return ((IGuidId)value).Value;
 			}
 
-			throw new NotSupportedException($"Cannot convert to type {destinationType}");
+			throw new NotSupportedException($"Tried to convert to {destinationType} from Id<{_idType}> but not supported");
 		}
 
+		private object ConvertFromGuid(Guid value)
+		{
+			return _idTypeConstructor.Invoke(new object[] { value });
+		}
+
+		private readonly Type _idType;
 		private readonly ConstructorInfo _idTypeConstructor;
 	}
 }

@@ -9,6 +9,7 @@ namespace StronglyTyped.LongIds
 	{
 		public IdTypeConverter(Type idType)
 		{
+			_idType = idType;
 			_idTypeConstructor = idType.GetConstructor(new[] { typeof(long) });
 		}
 
@@ -19,7 +20,16 @@ namespace StronglyTyped.LongIds
 
 		public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
 		{
-			return _idTypeConstructor.Invoke(new object[] { long.Parse((string)value) });
+			if (value is string valueAsString)
+			{
+				return ConvertFromLong(long.Parse(valueAsString));
+			}
+			else if (value is long valueAsLong)
+			{
+				return ConvertFromLong(valueAsLong);
+			}
+
+			throw new NotSupportedException($"Tried to convert from {value.GetType()} to Id<{_idType}> but not supported");
 		}
 
 		public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)
@@ -42,6 +52,12 @@ namespace StronglyTyped.LongIds
 			throw new NotSupportedException($"Cannot convert to type {destinationType}");
 		}
 
+		private object ConvertFromLong(long value)
+		{
+			return _idTypeConstructor.Invoke(new object[] { value });
+		}
+
+		private readonly Type _idType;
 		private readonly ConstructorInfo _idTypeConstructor;
 	}
 }
