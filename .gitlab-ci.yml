@@ -17,7 +17,7 @@ publish:GuidIds:
     stage: publish
     when: manual
     script:
-        - "PackagePath=$(ls ./GuidIds | head -1)"
+        - "PackagePath='./GuidIds/$(ls ./GuidIds | head -1)'"
         - "dotnet nuget push $PackagePath --api-key $NugetKey --source $Source"
 
 build:GuidIds.Dapper:
@@ -35,7 +35,7 @@ publish:GuidIds.Dapper:
     stage: publish
     when: manual
     script:
-        - "PackagePath=$(ls ./GuidIds.Dapper | head -1)"
+        - "PackagePath='./GuidIds.Dapper/$(ls ./GuidIds.Dapper | head -1)'"
         - "dotnet nuget push $PackagePath --api-key $NugetKey --source $Source"
 
 build:IntIds:
@@ -53,7 +53,7 @@ publish:IntIds:
     stage: publish
     when: manual
     script:
-        - "PackagePath=$(ls ./IntIds | head -1)"
+        - "PackagePath='./IntIds/$(ls ./IntIds | head -1)'"
         - "dotnet nuget push $PackagePath --api-key $NugetKey --source $Source"
 
 build:IntIds.Dapper:
@@ -71,7 +71,7 @@ publish:IntIds.Dapper:
     stage: publish
     when: manual
     script:
-        - "PackagePath=$(ls ./IntIds.Dapper | head -1)"
+        - "PackagePath='./IntIds.Dapper/$(ls ./IntIds.Dapper | head -1)'"
         - "dotnet nuget push $PackagePath --api-key $NugetKey --source $Source"
 
 build:LongIds:
@@ -89,7 +89,7 @@ publish:LongIds:
     stage: publish
     when: manual
     script:
-        - "PackagePath=$(ls ./LongIds | head -1)"
+        - "PackagePath='./LongIds/$(ls ./LongIds | head -1)'"
         - "dotnet nuget push $PackagePath --api-key $NugetKey --source $Source"
 
 build:LongIds.Dapper:
@@ -107,7 +107,7 @@ publish:LongIds.Dapper:
     stage: publish
     when: manual
     script:
-        - "PackagePath=$(ls ./LongIds.Dapper | head -1)"
+        - "PackagePath='./LongIds.Dapper/$(ls ./LongIds.Dapper | head -1)'"
         - "dotnet nuget push $PackagePath --api-key $NugetKey --source $Source"
 
 build:StringIds:
@@ -125,7 +125,7 @@ publish:StringIds:
     stage: publish
     when: manual
     script:
-        - "PackagePath=$(ls ./StringIds | head -1)"
+        - "PackagePath='./StringIds/$(ls ./StringIds | head -1)'"
         - "dotnet nuget push $PackagePath --api-key $NugetKey --source $Source"
 
 build:StringIds.Dapper:
@@ -143,5 +143,5 @@ publish:StringIds.Dapper:
     stage: publish
     when: manual
     script:
-        - "PackagePath=$(ls ./StringIds.Dapper | head -1)"
+        - "PackagePath='./StringIds.Dapper/$(ls ./StringIds.Dapper | head -1)'"
         - "dotnet nuget push $PackagePath --api-key $NugetKey --source $Source"
