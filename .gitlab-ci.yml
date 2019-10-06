@@ -18,7 +18,7 @@ publish:GuidIds:
     when: manual
     script:
         - "PackagePath=$(ls ./GuidIds | head -1)"
-        - "dotnet nuget push $PackagePath -k $NugetKey"
+        - "dotnet nuget push $PackagePath --api-key $NugetKey --source $Source"
 
 build:GuidIds.Dapper:
     image: mcr.microsoft.com/dotnet/core/sdk:2.2
@@ -36,7 +36,7 @@ publish:GuidIds.Dapper:
     when: manual
     script:
         - "PackagePath=$(ls ./GuidIds.Dapper | head -1)"
-        - "dotnet nuget push $PackagePath -k $NugetKey"
+        - "dotnet nuget push $PackagePath --api-key $NugetKey --source $Source"
 
 build:IntIds:
     image: mcr.microsoft.com/dotnet/core/sdk:2.2
@@ -54,7 +54,7 @@ publish:IntIds:
     when: manual
     script:
         - "PackagePath=$(ls ./IntIds | head -1)"
-        - "dotnet nuget push $PackagePath -k $NugetKey"
+        - "dotnet nuget push $PackagePath --api-key $NugetKey --source $Source"
 
 build:IntIds.Dapper:
     image: mcr.microsoft.com/dotnet/core/sdk:2.2
@@ -72,7 +72,7 @@ publish:IntIds.Dapper:
     when: manual
     script:
         - "PackagePath=$(ls ./IntIds.Dapper | head -1)"
-        - "dotnet nuget push $PackagePath -k $NugetKey"
+        - "dotnet nuget push $PackagePath --api-key $NugetKey --source $Source"
 
 build:LongIds:
     image: mcr.microsoft.com/dotnet/core/sdk:2.2
@@ -90,7 +90,7 @@ publish:LongIds:
     when: manual
     script:
         - "PackagePath=$(ls ./LongIds | head -1)"
-        - "dotnet nuget push $PackagePath -k $NugetKey"
+        - "dotnet nuget push $PackagePath --api-key $NugetKey --source $Source"
 
 build:LongIds.Dapper:
     image: mcr.microsoft.com/dotnet/core/sdk:2.2
@@ -108,7 +108,7 @@ publish:LongIds.Dapper:
     when: manual
     script:
         - "PackagePath=$(ls ./LongIds.Dapper | head -1)"
-        - "dotnet nuget push $PackagePath -k $NugetKey"
+        - "dotnet nuget push $PackagePath --api-key $NugetKey --source $Source"
 
 build:StringIds:
     image: mcr.microsoft.com/dotnet/core/sdk:2.2
@@ -126,7 +126,7 @@ publish:StringIds:
     when: manual
     script:
         - "PackagePath=$(ls ./StringIds | head -1)"
-        - "dotnet nuget push $PackagePath -k $NugetKey"
+        - "dotnet nuget push $PackagePath --api-key $NugetKey --source $Source"
 
 build:StringIds.Dapper:
     image: mcr.microsoft.com/dotnet/core/sdk:2.2
@@ -144,4 +144,4 @@ publish:StringIds.Dapper:
     when: manual
     script:
         - "PackagePath=$(ls ./StringIds.Dapper | head -1)"
-        - "dotnet nuget push $PackagePath -k $NugetKey"
+        - "dotnet nuget push $PackagePath --api-key $NugetKey --source $Source"
