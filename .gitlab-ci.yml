@@ -19,4 +19,6 @@ publish:GuidIds:
     script:
         - "PackagePath=./GuidIds/"
         - "PackagePath+=$(ls ./GuidIds | head -1)"
+        - "echo $PackagePath"
+        - "echo $Source"
         - "dotnet nuget push $PackagePath --api-key=$NugetKey --source=$Source"
