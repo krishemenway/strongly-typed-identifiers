@@ -20,7 +20,26 @@ publish:GuidIds:
         - "PackagePath=./GuidIds/"
         - "PackagePath+=$(ls ./GuidIds | head -1)"
         - "dotnet nuget push $PackagePath --api-key=$NugetKey --source=$Source"
-        
+
+build:GuidIds.Dapper:
+    image: mcr.microsoft.com/dotnet/core/sdk:2.2
+    stage: build
+    script:
+        - "dotnet pack ./StronglyTyped.GuidIds.Dapper --include-source --include-symbols --output ../GuidIds.Dapper"
+    artifacts:
+        name: "$CI_JOB_NAME"
+        paths:
+            - GuidIds.Dapper
+
+publish:GuidIds.Dapper:
+    image: mcr.microsoft.com/dotnet/core/sdk:2.2
+    stage: publish
+    when: manual
+    script:
+        - "PackagePath=./GuidIds.Dapper/"
+        - "PackagePath+=$(ls ./GuidIds.Dapper | head -1)"
+        - "dotnet nuget push $PackagePath --api-key=$NugetKey --source=$Source"
+
 build:IntIds:
     image: mcr.microsoft.com/dotnet/core/sdk:2.2
     stage: build
@@ -39,7 +58,26 @@ publish:IntIds:
         - "PackagePath=./IntIds/"
         - "PackagePath+=$(ls ./IntIds | head -1)"
         - "dotnet nuget push $PackagePath --api-key=$NugetKey --source=$Source"
-             
+
+build:IntIds.Dapper:
+    image: mcr.microsoft.com/dotnet/core/sdk:2.2
+    stage: build
+    script:
+        - "dotnet pack ./StronglyTyped.IntIds.Dapper --include-source --include-symbols --output ../IntIds.Dapper"
+    artifacts:
+        name: "$CI_JOB_NAME"
+        paths:
+            - IntIds.Dapper
+
+publish:IntIds.Dapper:
+    image: mcr.microsoft.com/dotnet/core/sdk:2.2
+    stage: publish
+    when: manual
+    script:
+        - "PackagePath=./IntIds.Dapper/"
+        - "PackagePath+=$(ls ./IntIds.Dapper | head -1)"
+        - "dotnet nuget push $PackagePath --api-key=$NugetKey --source=$Source"
+
 build:LongIds:
     image: mcr.microsoft.com/dotnet/core/sdk:2.2
     stage: build
@@ -58,7 +96,26 @@ publish:LongIds:
         - "PackagePath=./LongIds/"
         - "PackagePath+=$(ls ./LongIds | head -1)"
         - "dotnet nuget push $PackagePath --api-key=$NugetKey --source=$Source"
-           
+
+build:LongIds.Dapper:
+    image: mcr.microsoft.com/dotnet/core/sdk:2.2
+    stage: build
+    script:
+        - "dotnet pack ./StronglyTyped.LongIds.Dapper --include-source --include-symbols --output ../LongIds.Dapper"
+    artifacts:
+        name: "$CI_JOB_NAME"
+        paths:
+            - LongIds.Dapper
+
+publish:LongIds.Dapper:
+    image: mcr.microsoft.com/dotnet/core/sdk:2.2
+    stage: publish
+    when: manual
+    script:
+        - "PackagePath=./LongIds.Dapper/"
+        - "PackagePath+=$(ls ./LongIds.Dapper | head -1)"
+        - "dotnet nuget push $PackagePath --api-key=$NugetKey --source=$Source"
+
 build:StringIds:
     image: mcr.microsoft.com/dotnet/core/sdk:2.2
     stage: build
@@ -76,4 +133,23 @@ publish:StringIds:
     script:
         - "PackagePath=./StringIds/"
         - "PackagePath+=$(ls ./StringIds | head -1)"
+        - "dotnet nuget push $PackagePath --api-key=$NugetKey --source=$Source"
+
+build:StringIds.Dapper:
+    image: mcr.microsoft.com/dotnet/core/sdk:2.2
+    stage: build
+    script:
+        - "dotnet pack ./StronglyTyped.StringIds.Dapper --include-source --include-symbols --output ../StringIds.Dapper"
+    artifacts:
+        name: "$CI_JOB_NAME"
+        paths:
+            - StringIds.Dapper
+
+publish:StringIds.Dapper:
+    image: mcr.microsoft.com/dotnet/core/sdk:2.2
+    stage: publish
+    when: manual
+    script:
+        - "PackagePath=./StringIds.Dapper/"
+        - "PackagePath+=$(ls ./StringIds.Dapper | head -1)"
         - "dotnet nuget push $PackagePath --api-key=$NugetKey --source=$Source"
