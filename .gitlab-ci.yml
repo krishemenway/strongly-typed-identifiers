@@ -19,6 +19,61 @@ publish:GuidIds:
     script:
         - "PackagePath=./GuidIds/"
         - "PackagePath+=$(ls ./GuidIds | head -1)"
-        - "echo $PackagePath"
-        - "echo $Source"
+        - "dotnet nuget push $PackagePath --api-key=$NugetKey --source=$Source"
+        
+build:IntIds:
+    image: mcr.microsoft.com/dotnet/core/sdk:2.2
+    stage: build
+    script:
+        - "dotnet pack ./StronglyTyped.IntIds --include-source --include-symbols --output ../IntIds"
+    artifacts:
+        name: "$CI_JOB_NAME"
+        paths:
+            - IntIds
+
+publish:IntIds:
+    image: mcr.microsoft.com/dotnet/core/sdk:2.2
+    stage: publish
+    when: manual
+    script:
+        - "PackagePath=./IntIds/"
+        - "PackagePath+=$(ls ./IntIds | head -1)"
+        - "dotnet nuget push $PackagePath --api-key=$NugetKey --source=$Source"
+             
+build:LongIds:
+    image: mcr.microsoft.com/dotnet/core/sdk:2.2
+    stage: build
+    script:
+        - "dotnet pack ./StronglyTyped.LongIds --include-source --include-symbols --output ../LongIds"
+    artifacts:
+        name: "$CI_JOB_NAME"
+        paths:
+            - LongIds
+
+publish:LongIds:
+    image: mcr.microsoft.com/dotnet/core/sdk:2.2
+    stage: publish
+    when: manual
+    script:
+        - "PackagePath=./LongIds/"
+        - "PackagePath+=$(ls ./LongIds | head -1)"
+        - "dotnet nuget push $PackagePath --api-key=$NugetKey --source=$Source"
+           
+build:StringIds:
+    image: mcr.microsoft.com/dotnet/core/sdk:2.2
+    stage: build
+    script:
+        - "dotnet pack ./StronglyTyped.StringIds --include-source --include-symbols --output ../StringIds"
+    artifacts:
+        name: "$CI_JOB_NAME"
+        paths:
+            - StringIds
+
+publish:StringIds:
+    image: mcr.microsoft.com/dotnet/core/sdk:2.2
+    stage: publish
+    when: manual
+    script:
+        - "PackagePath=./StringIds/"
+        - "PackagePath+=$(ls ./StringIds | head -1)"
         - "dotnet nuget push $PackagePath --api-key=$NugetKey --source=$Source"
