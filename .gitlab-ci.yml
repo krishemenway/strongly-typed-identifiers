@@ -3,7 +3,7 @@ stages:
     - publish
 
 build:GuidIds:
-    image: mcr.microsoft.com/dotnet/core/sdk:2.2
+    image: mcr.microsoft.com/dotnet/core/sdk:3.0
     stage: build
     script:
         - "dotnet pack ./StronglyTyped.GuidIds --include-source --include-symbols --output ../GuidIds"
@@ -13,7 +13,7 @@ build:GuidIds:
             - GuidIds
 
 publish:GuidIds:
-    image: mcr.microsoft.com/dotnet/core/sdk:2.2
+    image: mcr.microsoft.com/dotnet/core/sdk:3.0
     stage: publish
     when: manual
     script:
@@ -22,7 +22,7 @@ publish:GuidIds:
         - "dotnet nuget push $PackagePath --api-key=$NugetKey --source=$Source"
 
 build:GuidIds.Dapper:
-    image: mcr.microsoft.com/dotnet/core/sdk:2.2
+    image: mcr.microsoft.com/dotnet/core/sdk:3.0
     stage: build
     script:
         - "dotnet pack ./StronglyTyped.GuidIds.Dapper --include-source --include-symbols --output ../GuidIds.Dapper"
@@ -32,7 +32,7 @@ build:GuidIds.Dapper:
             - GuidIds.Dapper
 
 publish:GuidIds.Dapper:
-    image: mcr.microsoft.com/dotnet/core/sdk:2.2
+    image: mcr.microsoft.com/dotnet/core/sdk:3.0
     stage: publish
     when: manual
     script:
@@ -41,7 +41,7 @@ publish:GuidIds.Dapper:
         - "dotnet nuget push $PackagePath --api-key=$NugetKey --source=$Source"
 
 build:IntIds:
-    image: mcr.microsoft.com/dotnet/core/sdk:2.2
+    image: mcr.microsoft.com/dotnet/core/sdk:3.0
     stage: build
     script:
         - "dotnet pack ./StronglyTyped.IntIds --include-source --include-symbols --output ../IntIds"
@@ -51,7 +51,7 @@ build:IntIds:
             - IntIds
 
 publish:IntIds:
-    image: mcr.microsoft.com/dotnet/core/sdk:2.2
+    image: mcr.microsoft.com/dotnet/core/sdk:3.0
     stage: publish
     when: manual
     script:
@@ -60,7 +60,7 @@ publish:IntIds:
         - "dotnet nuget push $PackagePath --api-key=$NugetKey --source=$Source"
 
 build:IntIds.Dapper:
-    image: mcr.microsoft.com/dotnet/core/sdk:2.2
+    image: mcr.microsoft.com/dotnet/core/sdk:3.0
     stage: build
     script:
         - "dotnet pack ./StronglyTyped.IntIds.Dapper --include-source --include-symbols --output ../IntIds.Dapper"
@@ -70,7 +70,7 @@ build:IntIds.Dapper:
             - IntIds.Dapper
 
 publish:IntIds.Dapper:
-    image: mcr.microsoft.com/dotnet/core/sdk:2.2
+    image: mcr.microsoft.com/dotnet/core/sdk:3.0
     stage: publish
     when: manual
     script:
@@ -79,7 +79,7 @@ publish:IntIds.Dapper:
         - "dotnet nuget push $PackagePath --api-key=$NugetKey --source=$Source"
 
 build:LongIds:
-    image: mcr.microsoft.com/dotnet/core/sdk:2.2
+    image: mcr.microsoft.com/dotnet/core/sdk:3.0
     stage: build
     script:
         - "dotnet pack ./StronglyTyped.LongIds --include-source --include-symbols --output ../LongIds"
@@ -89,7 +89,7 @@ build:LongIds:
             - LongIds
 
 publish:LongIds:
-    image: mcr.microsoft.com/dotnet/core/sdk:2.2
+    image: mcr.microsoft.com/dotnet/core/sdk:3.0
     stage: publish
     when: manual
     script:
@@ -98,7 +98,7 @@ publish:LongIds:
         - "dotnet nuget push $PackagePath --api-key=$NugetKey --source=$Source"
 
 build:LongIds.Dapper:
-    image: mcr.microsoft.com/dotnet/core/sdk:2.2
+    image: mcr.microsoft.com/dotnet/core/sdk:3.0
     stage: build
     script:
         - "dotnet pack ./StronglyTyped.LongIds.Dapper --include-source --include-symbols --output ../LongIds.Dapper"
@@ -108,7 +108,7 @@ build:LongIds.Dapper:
             - LongIds.Dapper
 
 publish:LongIds.Dapper:
-    image: mcr.microsoft.com/dotnet/core/sdk:2.2
+    image: mcr.microsoft.com/dotnet/core/sdk:3.0
     stage: publish
     when: manual
     script:
@@ -117,7 +117,7 @@ publish:LongIds.Dapper:
         - "dotnet nuget push $PackagePath --api-key=$NugetKey --source=$Source"
 
 build:StringIds:
-    image: mcr.microsoft.com/dotnet/core/sdk:2.2
+    image: mcr.microsoft.com/dotnet/core/sdk:3.0
     stage: build
     script:
         - "dotnet pack ./StronglyTyped.StringIds --include-source --include-symbols --output ../StringIds"
@@ -127,7 +127,7 @@ build:StringIds:
             - StringIds
 
 publish:StringIds:
-    image: mcr.microsoft.com/dotnet/core/sdk:2.2
+    image: mcr.microsoft.com/dotnet/core/sdk:3.0
     stage: publish
     when: manual
     script:
@@ -136,7 +136,7 @@ publish:StringIds:
         - "dotnet nuget push $PackagePath --api-key=$NugetKey --source=$Source"
 
 build:StringIds.Dapper:
-    image: mcr.microsoft.com/dotnet/core/sdk:2.2
+    image: mcr.microsoft.com/dotnet/core/sdk:3.0
     stage: build
     script:
         - "dotnet pack ./StronglyTyped.StringIds.Dapper --include-source --include-symbols --output ../StringIds.Dapper"
@@ -146,7 +146,7 @@ build:StringIds.Dapper:
             - StringIds.Dapper
 
 publish:StringIds.Dapper:
-    image: mcr.microsoft.com/dotnet/core/sdk:2.2
+    image: mcr.microsoft.com/dotnet/core/sdk:3.0
     stage: publish
     when: manual
     script:
