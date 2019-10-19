@@ -1,45 +1,48 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace StronglyTyped.LongIds
 {
-	public class IdJsonConverter : JsonConverter
+	public class IdJsonConverter<TModel> : JsonConverter<Id<TModel>>
 	{
-		public override bool CanConvert(Type objectType)
-		{
-			return true;
-		}
-
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-		{
-			return Nullable.GetUnderlyingType(objectType) == null
-				? ReadJsonForNonNullableId(reader, objectType, serializer)
-				: ReadJsonForNullableId(reader, objectType, serializer);
-		}
-
-		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
-		{
-			writer.WriteValue(((ILongId)value).Value);
-		}
-
-		private static object ReadJsonForNonNullableId(JsonReader reader, Type objectType, JsonSerializer serializer)
+		public override Id<TModel> Read(ref Utf8JsonReader reader, Type objectType, JsonSerializerOptions options)
 		{
 			var constructor = objectType.GetConstructor(new[] { typeof(long) });
-			var value = serializer.Deserialize<long>(reader);
-			return constructor.Invoke(new object[] { value });
+			return (Id<TModel>)constructor.Invoke(new object[] { reader.GetInt64() });
 		}
 
-		private static object ReadJsonForNullableId(JsonReader reader, Type objectType, JsonSerializer serializer)
+		public override void Write(Utf8JsonWriter writer, Id<TModel> value, JsonSerializerOptions options)
 		{
-			var value = serializer.Deserialize<long?>(reader);
+			writer.WriteStringValue(value.ToString());
+		}
+	}
 
-			if (value == null)
+	public class IdJsonConverterFactory : JsonConverterFactory
+	{
+		public override bool CanConvert(Type typeToConvert)
+		{
+			if (!typeToConvert.IsGenericType)
 			{
-				return null;
+				return false;
 			}
 
-			var constructor = objectType.GenericTypeArguments[0].GetConstructor(new[] { typeof(long) });
-			return constructor.Invoke(new object[] { value });
+			var type = typeToConvert;
+
+			if (!type.IsGenericTypeDefinition)
+			{
+				type = type.GetGenericTypeDefinition();
+			}
+
+			return type == typeof(Id<>);
+		}
+
+		public override JsonConverter CreateConverter(Type typeToConvert, JsonSerializerOptions options)
+		{
+			var keyType = typeToConvert.GenericTypeArguments[0];
+			var converterType = typeof(IdJsonConverter<>).MakeGenericType(keyType);
+
+			return (JsonConverter)Activator.CreateInstance(converterType);
 		}
 	}
 }

@@ -1,6 +1,6 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.ComponentModel;
+using System.Text.Json.Serialization;
 
 namespace StronglyTyped.LongIds
 {
@@ -12,7 +12,7 @@ namespace StronglyTyped.LongIds
 	/// <summary>Represents a long identifer for the specified type</summary>
 	/// <typeparam name="TModel">Type the identifier is for (e.g. Person, Team)</typeparam>
 	[TypeConverter(typeof(IdTypeConverter))]
-	[JsonConverter(typeof(IdJsonConverter))]
+	[JsonConverter(typeof(IdJsonConverterFactory))]
 	public struct Id<TModel> : ILongId, IEquatable<Id<TModel>>, IComparable<Id<TModel>>
 	{
 		/// <summary>Create new identifier with value</summary>

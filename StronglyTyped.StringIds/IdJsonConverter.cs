@@ -2,14 +2,14 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace StronglyTyped.IntIds
+namespace StronglyTyped.StringIds
 {
 	public class IdJsonConverter<TModel> : JsonConverter<Id<TModel>>
 	{
 		public override Id<TModel> Read(ref Utf8JsonReader reader, Type objectType, JsonSerializerOptions options)
 		{
-			var constructor = objectType.GetConstructor(new[] { typeof(int) });
-			return (Id<TModel>)constructor.Invoke(new object[] { reader.GetInt32() });
+			var constructor = objectType.GetConstructor(new[] { typeof(string) });
+			return (Id<TModel>)constructor.Invoke(new object[] { reader.GetGuid() });
 		}
 
 		public override void Write(Utf8JsonWriter writer, Id<TModel> value, JsonSerializerOptions options)

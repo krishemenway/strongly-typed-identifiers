@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Text.Json.Serialization;
 
 namespace StronglyTyped.GuidIds
 {
@@ -11,6 +12,7 @@ namespace StronglyTyped.GuidIds
 	/// <summary>Represents a Guid identifer for the specified type</summary>
 	/// <typeparam name="TModel">Type the identifier is for (e.g. Person, Team)</typeparam>
 	[TypeConverter(typeof(IdTypeConverter))]
+	[JsonConverter(typeof(IdJsonConverterFactory))]
 	public struct Id<TModel> : IGuidId, IEquatable<Id<TModel>>, IComparable<Id<TModel>>
 	{
 		/// <summary>Create new identifier with value</summary>
