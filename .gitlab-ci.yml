@@ -6,7 +6,7 @@ build:GuidIds:
     image: mcr.microsoft.com/dotnet/core/sdk:3.0
     stage: build
     script:
-        - "dotnet pack ./StronglyTyped.GuidIds --include-source --include-symbols --output ../GuidIds"
+        - "dotnet pack ./StronglyTyped.GuidIds --include-source --include-symbols --output ./GuidIds"
     artifacts:
         name: "$CI_JOB_NAME"
         paths:
@@ -25,7 +25,7 @@ build:GuidIds.Dapper:
     image: mcr.microsoft.com/dotnet/core/sdk:3.0
     stage: build
     script:
-        - "dotnet pack ./StronglyTyped.GuidIds.Dapper --include-source --include-symbols --output ../GuidIds.Dapper"
+        - "dotnet pack ./StronglyTyped.GuidIds.Dapper --include-source --include-symbols --output ./GuidIds.Dapper"
     artifacts:
         name: "$CI_JOB_NAME"
         paths:
@@ -44,7 +44,7 @@ build:IntIds:
     image: mcr.microsoft.com/dotnet/core/sdk:3.0
     stage: build
     script:
-        - "dotnet pack ./StronglyTyped.IntIds --include-source --include-symbols --output ../IntIds"
+        - "dotnet pack ./StronglyTyped.IntIds --include-source --include-symbols --output ./IntIds"
     artifacts:
         name: "$CI_JOB_NAME"
         paths:
@@ -63,7 +63,7 @@ build:IntIds.Dapper:
     image: mcr.microsoft.com/dotnet/core/sdk:3.0
     stage: build
     script:
-        - "dotnet pack ./StronglyTyped.IntIds.Dapper --include-source --include-symbols --output ../IntIds.Dapper"
+        - "dotnet pack ./StronglyTyped.IntIds.Dapper --include-source --include-symbols --output ./IntIds.Dapper"
     artifacts:
         name: "$CI_JOB_NAME"
         paths:
@@ -82,7 +82,7 @@ build:LongIds:
     image: mcr.microsoft.com/dotnet/core/sdk:3.0
     stage: build
     script:
-        - "dotnet pack ./StronglyTyped.LongIds --include-source --include-symbols --output ../LongIds"
+        - "dotnet pack ./StronglyTyped.LongIds --include-source --include-symbols --output ./LongIds"
     artifacts:
         name: "$CI_JOB_NAME"
         paths:
@@ -101,7 +101,7 @@ build:LongIds.Dapper:
     image: mcr.microsoft.com/dotnet/core/sdk:3.0
     stage: build
     script:
-        - "dotnet pack ./StronglyTyped.LongIds.Dapper --include-source --include-symbols --output ../LongIds.Dapper"
+        - "dotnet pack ./StronglyTyped.LongIds.Dapper --include-source --include-symbols --output ./LongIds.Dapper"
     artifacts:
         name: "$CI_JOB_NAME"
         paths:
@@ -120,7 +120,7 @@ build:StringIds:
     image: mcr.microsoft.com/dotnet/core/sdk:3.0
     stage: build
     script:
-        - "dotnet pack ./StronglyTyped.StringIds --include-source --include-symbols --output ../StringIds"
+        - "dotnet pack ./StronglyTyped.StringIds --include-source --include-symbols --output ./StringIds"
     artifacts:
         name: "$CI_JOB_NAME"
         paths:
@@ -139,7 +139,7 @@ build:StringIds.Dapper:
     image: mcr.microsoft.com/dotnet/core/sdk:3.0
     stage: build
     script:
-        - "dotnet pack ./StronglyTyped.StringIds.Dapper --include-source --include-symbols --output ../StringIds.Dapper"
+        - "dotnet pack ./StronglyTyped.StringIds.Dapper --include-source --include-symbols --output ./StringIds.Dapper"
     artifacts:
         name: "$CI_JOB_NAME"
         paths:
