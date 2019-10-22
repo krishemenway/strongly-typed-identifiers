@@ -1,8 +1,11 @@
-﻿using System;
-using System.IO;
-using System.Reflection;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
+using Serilog;
+using Serilog.Events;
+using System;
+using System.IO;
+using System.Reflection;
 
 namespace ExampleService
 {
@@ -10,6 +13,8 @@ namespace ExampleService
 	{
 		public static void Main(string[] args)
 		{
+			SetupLogging();
+
 			Settings = new ConfigurationBuilder()
 				.SetBasePath(Directory)
 				.AddJsonFile("Settings.json", optional: false, reloadOnChange: true)
@@ -18,6 +23,17 @@ namespace ExampleService
 				.Build();
 
 			StartWebHost();
+		}
+
+		private static void SetupLogging()
+		{
+			Log.Logger = new LoggerConfiguration()
+				.MinimumLevel.Debug()
+				.MinimumLevel.Override("Microsoft", LogEventLevel.Information)
+				.Enrich.FromLogContext()
+				.WriteTo.Console()
+				.WriteTo.RollingFile("app-{Date}.log")
+				.CreateLogger();
 		}
 
 		private static void StartWebHost()
@@ -29,6 +45,7 @@ namespace ExampleService
 					.UseConfiguration(Settings)
 					.UseStartup<ProgramSetup>()
 					.UseUrls($"http://*:{Settings.GetValue<int>("WebPort")}")
+					.UseSerilog()
 					.Build();
 
 				WebHost.Run();
