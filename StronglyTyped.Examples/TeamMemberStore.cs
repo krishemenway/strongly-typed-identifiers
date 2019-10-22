@@ -4,6 +4,8 @@ using System.Linq;
 using Int = StronglyTyped.IntIds;
 using Guid = StronglyTyped.GuidIds;
 using Long = StronglyTyped.LongIds;
+using GuidDapper = StronglyTyped.GuidIds.Dapper;
+using IntDapper = StronglyTyped.IntIds.Dapper;
 
 namespace ExampleService
 {
@@ -14,6 +16,12 @@ namespace ExampleService
 
 	public class TeamMemberStore : ITeamMemberStore
 	{
+		static TeamMemberStore()
+		{
+			GuidDapper.TypeHandlerForIdOf<Person>.Register();
+			IntDapper.TypeHandlerForIdOf<Team>.Register();
+		}
+
 		public IReadOnlyList<Person> FindTeamMembers(Int.Id<Team> teamId)
 		{
 			using (var connection = Database.CreateConnection())
