@@ -1,4 +1,4 @@
-# StronglyTyped.longIds
+# StronglyTyped.LongIds
 
 ## What is this? Why do I want this?
 

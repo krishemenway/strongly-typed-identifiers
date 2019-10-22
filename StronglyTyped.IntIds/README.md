@@ -1,4 +1,4 @@
-# StronglyTyped.intIds
+# StronglyTyped.IntIds
 
 ## What is this? Why do I want this?
 
