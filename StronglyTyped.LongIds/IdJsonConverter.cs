@@ -14,7 +14,7 @@ namespace StronglyTyped.LongIds
 
 		public override void Write(Utf8JsonWriter writer, Id<TModel> value, JsonSerializerOptions options)
 		{
-			writer.WriteStringValue(value.ToString());
+			writer.WriteNumberValue(value.Value);
 		}
 	}
 
