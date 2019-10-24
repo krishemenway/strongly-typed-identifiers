@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using StronglyTyped.GuidIds;
+using System.Linq;
 
 namespace ExampleService
 {
@@ -20,6 +21,18 @@ namespace ExampleService
 				return NotFound();
 			}
 
+			return CreatePersonResponse(person);
+		}
+
+		[Route("Person/FindByIds")]
+		[ProducesResponseType(200, Type = typeof(PersonResponse))]
+		public ActionResult<PersonResponse[]> FindByIds([FromQuery] Id<Person>[] personIds)
+		{
+			return _personStore.FindMany(personIds).Select(CreatePersonResponse).ToArray();
+		}
+
+		private PersonResponse CreatePersonResponse(Person person)
+		{
 			return new PersonResponse
 			{
 				PersonId = person.PersonId,
