@@ -5,7 +5,6 @@ using Serilog;
 using Serilog.Events;
 using System;
 using System.IO;
-using System.Reflection;
 
 namespace ExampleService
 {
@@ -57,7 +56,7 @@ namespace ExampleService
 			}
 		}
 
-		public static string Directory { get; } = new FileInfo(Assembly.GetExecutingAssembly().Location).Directory.FullName;
+		public static string Directory { get; } = new FileInfo(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName).Directory.FullName;
 
 		public static IConfigurationRoot Settings { get; private set; }
 		public static IWebHost WebHost { get; private set; }
