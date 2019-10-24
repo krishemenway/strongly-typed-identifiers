@@ -4,11 +4,19 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Extensions.Configuration;
+using System.Reflection;
 
 namespace ExampleService
 {
 	internal static class Database
 	{
+		static Database()
+		{
+			StronglyTyped.GuidIds.Dapper.DapperIdRegistrar.RegisterAll(Assembly.GetExecutingAssembly());
+			StronglyTyped.IntIds.Dapper.DapperIdRegistrar.RegisterAll(Assembly.GetExecutingAssembly());
+			StronglyTyped.LongIds.Dapper.DapperIdRegistrar.RegisterAll(Assembly.GetExecutingAssembly());
+		}
+
 		internal static IDbConnection CreateConnection()
 		{
 			var connection = new NpgsqlConnection(ConnectionString.Value);

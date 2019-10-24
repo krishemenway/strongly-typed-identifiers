@@ -6,7 +6,7 @@ namespace StronglyTyped.LongIds.Dapper
 {
 	/// <summary>Type handler for registering identifiers in Dapper queries</summary>
 	/// <typeparam name="TModel">Type the identifier is for (e.g. Person, Team)</typeparam>
-	public class TypeHandlerForIdOfT<TModel> : TypeHandler<Id<TModel>>
+	public class TypeHandlerForIdOf<TModel> : TypeHandler<Id<TModel>>
 	{
 		public override Id<TModel> Parse(object value)
 		{
@@ -22,12 +22,6 @@ namespace StronglyTyped.LongIds.Dapper
 		{
 			parameter.DbType = DbType.Int64;
 			parameter.Value = value.Value;
-		}
-
-		/// <summary>Register identifier with Dapper</summary>
-		public static void Register()
-		{
-			AddTypeHandler(new TypeHandlerForIdOfT<TModel>());
 		}
 	}
 }

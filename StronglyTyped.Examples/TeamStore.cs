@@ -1,6 +1,5 @@
 ﻿using Dapper;
 using StronglyTyped.IntIds;
-using StronglyTyped.IntIds.Dapper;
 using System.Linq;
 
 namespace ExampleService
@@ -12,11 +11,6 @@ namespace ExampleService
 
 	public class TeamStore : ITeamStore
 	{
-		static TeamStore()
-		{
-			TypeHandlerForIdOf<Team>.Register();
-		}
-
 		public TeamStore(ITeamMemberStore teamMemberStore = null)
 		{
 			_teamMemberStore = teamMemberStore ?? new TeamMemberStore();

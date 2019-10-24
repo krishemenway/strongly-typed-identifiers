@@ -1,4 +1,4 @@
-﻿using Dapper;
+using Dapper;
 using Microsoft.Extensions.Configuration;
 using StronglyTyped.GuidIds;
 using StronglyTyped.GuidIds.Dapper;
@@ -14,11 +14,6 @@ namespace ExampleService
 
 	public class PersonStore : IPersonStore
 	{
-		static PersonStore()
-		{
-			TypeHandlerForIdOf<Person>.Register();
-		}
-
 		public bool TryFind(Id<Person> personId, out Person person)
 		{
 			if (Program.Settings.GetValue<bool>("UseEF"))

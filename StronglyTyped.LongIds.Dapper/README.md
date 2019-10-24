@@ -2,7 +2,11 @@
 
 ## What is this? Why do I want this?
 
-This is a companion library for to integrate StronglyTyped.LongIds as a usable type in a Dapper query in an easy way. All you have to do is call ```TypeHandlerForIdOf<TypeForId>.Register()``` and Dapper will be able to serialize & deserialize ```Id<TypeForId>```.
+This is a companion library for integrating ```Id<T>``` from ```StronglyTyped.LongIds``` as a usable type in a Dapper query.
+
+The simplest and worst performing method of accomplishing this is to call ```DapperIdRegistrar.RegisterAll(Assembly.GetExecutingAssembly())``` one time before any Dapper queries have an opprotunity to run. This method requires using ```System.Reflection``` to scan all the types in the provided assemblies to find instances of ```Id<T>``` and register them with Dapper.
+
+If you want to avoid this method and get a little bit of one-time performance back, you can register each ```Id<T>``` individually by executing this static method like so: ```DapperIdRegistrar.RegisterTypeHandlerForId<Person>()```.
 
 Check out this example:
 
@@ -13,11 +17,6 @@ using StronglyTyped.LongIds.Dapper;
 
 public class PersonStore
 {
-	static PersonStore()
-	{
-		TypeHandlerForIdOf<Person>.Register();
-	}
-
 	public bool TryFind(Id<Person> personId, out Person person)
 	{
 		using (var connection = Database.CreateConnection())
@@ -46,5 +45,22 @@ public class PersonStore
 	{
 		public Id<Person> PersonId { get; set; }
 	}
+}
+
+internal static class Database
+{
+	static Database()
+	{
+		DapperIdRegistrar.RegisterAll(Assembly.GetExecutingAssembly());
+	}
+
+	internal static IDbConnection CreateConnection()
+	{
+		var connection = new NpgsqlConnection(ConnectionString);
+		connection.Open();
+		return connection;
+	}
+
+	private string ConnectionString { get; set; }
 }
 ```

@@ -23,11 +23,5 @@ namespace StronglyTyped.IntIds.Dapper
 			parameter.DbType = DbType.Int32;
 			parameter.Value = value.Value;
 		}
-
-		/// <summary>Register identifier with Dapper</summary>
-		public static void Register()
-		{
-			AddTypeHandler(new TypeHandlerForIdOf<TModel>());
-		}
 	}
 }

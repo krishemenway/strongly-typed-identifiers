@@ -23,11 +23,5 @@ namespace StronglyTyped.GuidIds.Dapper
 			parameter.DbType = DbType.Guid;
 			parameter.Value = value.Value;
 		}
-
-		/// <summary>Register identifier with Dapper</summary>
-		public static void Register()
-		{
-			AddTypeHandler(new TypeHandlerForIdOf<TModel>());
-		}
 	}
 }
