@@ -12,15 +12,8 @@ namespace StronglyTyped.GuidIds.Dapper
 		/// <param name="assemblies">Assemblies that can contain instances of Idlt;Tgt; to be used with Dapper</param>
 		public static void RegisterAll(params Assembly[] assemblies)
 		{
-			var idAssembly = Assembly.Load("StronglyTyped.GuidIds");
-			var idPropertyTypes = assemblies
-				.SelectMany(assembly => assembly.DefinedTypes)
-				.SelectMany(type => type.DeclaredProperties)
-				.Select(property => property.PropertyType)
-				.Where(x => x.Assembly.Equals(idAssembly))
-				.Distinct();
-
-			RegisterTypeHandlerForIds(idPropertyTypes.ToArray());
+			var relevantTypes = FindRelevantIdTypes(assemblies);
+			RegisterTypeHandlerForIds(relevantTypes);
 		}
 
 		/// <summary>Register specific Id&lt;T&gt; for use in Dapper queries. Ensure each Id&lt;T&gt; is registered before attempting to use them in Dapper queries.</summary>
@@ -43,6 +36,20 @@ namespace StronglyTyped.GuidIds.Dapper
 
 				SqlMapper.AddTypeHandler(propertyType, typeHandlerForPropertyType);
 			}
+		}
+
+		private static Type[] FindRelevantIdTypes(Assembly[] assemblies)
+		{
+			var allTypes = assemblies.SelectMany(assembly => assembly.DefinedTypes);
+
+			var idPropertyTypes = allTypes.SelectMany(type => type.DeclaredProperties).Select(property => property.PropertyType);
+			var idFieldTypes = allTypes.SelectMany(type => type.DeclaredFields).Select(field => field.FieldType);
+
+			var idAssembly = Assembly.Load("StronglyTyped.GuidIds");
+			return idPropertyTypes.Concat(idFieldTypes)
+				.Where(x => x.Assembly.Equals(idAssembly))
+				.Distinct()
+				.ToArray();
 		}
 	}
 }
