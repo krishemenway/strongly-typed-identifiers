@@ -47,9 +47,15 @@ namespace StronglyTyped.GuidIds.Dapper
 
 			var idAssembly = Assembly.Load("StronglyTyped.GuidIds");
 			return idPropertyTypes.Concat(idFieldTypes)
+				.Select(UnwrapNullableType)
 				.Where(x => x.Assembly.Equals(idAssembly))
-				.Distinct()
-				.ToArray();
+				.Distinct().ToArray();
+		}
+
+		private static Type UnwrapNullableType(Type type)
+		{
+			var underlyingType = Nullable.GetUnderlyingType(type);
+			return underlyingType != null ? underlyingType : type;
 		}
 	}
 }

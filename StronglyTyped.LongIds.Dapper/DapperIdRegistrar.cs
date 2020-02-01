@@ -47,9 +47,15 @@ namespace StronglyTyped.LongIds.Dapper
 
 			var idAssembly = Assembly.Load("StronglyTyped.LongIds");
 			return idPropertyTypes.Concat(idFieldTypes)
+				.Select(UnwrapNullableType)
 				.Where(x => x.Assembly.Equals(idAssembly))
-				.Distinct()
-				.ToArray();
+				.Distinct().ToArray();
+		}
+
+		private static Type UnwrapNullableType(Type type)
+		{
+			var underlyingType = Nullable.GetUnderlyingType(type);
+			return underlyingType != null ? underlyingType : type;
 		}
 	}
 }
