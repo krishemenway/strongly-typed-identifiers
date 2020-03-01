@@ -9,7 +9,7 @@ namespace StronglyTyped.StringIds
 		public override Id<TModel> Read(ref Utf8JsonReader reader, Type objectType, JsonSerializerOptions options)
 		{
 			var constructor = objectType.GetConstructor(new[] { typeof(string) });
-			return (Id<TModel>)constructor.Invoke(new object[] { reader.GetGuid() });
+			return (Id<TModel>)constructor.Invoke(new object[] { reader.GetString() });
 		}
 
 		public override void Write(Utf8JsonWriter writer, Id<TModel> value, JsonSerializerOptions options)
