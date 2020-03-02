@@ -18,6 +18,6 @@ jobs:
         name: StronglyTyped.IntIds
         path: ./StronglyTyped.IntIds/packed
     - name: Publish to Nuget
-      run: dotnet nuget push **/*.nupkg
+      run: dotnet nuget push **/*.symbols.nupkg
         --api-key ${{ secrets.NugetKey }}
         --source ${{ secrets.NugetSource }}
