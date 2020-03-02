@@ -1,0 +1,24 @@
+name: .NET Core
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 2.2.108
+    - name: Build with dotnet
+      run: dotnet pack ./StronglyTyped.GuidIds --include-source --include-symbols --output ./GuidIds
+    - uses: actions/upload-artifact@v1
+      with:
+        name: StronglyTyped.GuidIds
+        path: ./GuidIds
+    - name: Publish to Nuget
+      run: dotnet nuget push **/*.npkg
+        --api-key ${{ secrets.NugetKey }}
+        --source ${{ secrets.NugetSource }}
