@@ -1,4 +1,4 @@
-name: StronglyTyped.GuidIds
+name: StronglyTyped.LongIds
 on: [push]
 
 jobs:
@@ -12,11 +12,11 @@ jobs:
       with:
         dotnet-version: 2.2.108
     - name: Build with dotnet
-      run: dotnet pack ./StronglyTyped.GuidIds --include-source --include-symbols --output ./packed
+      run: dotnet pack ./StronglyTyped.LongIds --include-source --include-symbols --output ./packed
     - uses: actions/upload-artifact@v1
       with:
-        name: StronglyTyped.GuidIds
-        path: ./StronglyTyped.GuidIds/packed
+        name: StronglyTyped.LongIds
+        path: ./StronglyTyped.LongIds/packed
     - name: Publish to Nuget
       run: dotnet nuget push **/*.nupkg
         --api-key ${{ secrets.NugetKey }}
