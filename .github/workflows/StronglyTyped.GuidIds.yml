@@ -13,12 +13,12 @@ jobs:
       with:
         dotnet-version: 2.2.108
     - name: Build with dotnet
-      run: dotnet pack ./StronglyTyped.GuidIds --include-source --include-symbols --output ./GuidIds
+      run: dotnet pack ./StronglyTyped.GuidIds --include-source --include-symbols --output ./packed
     - uses: actions/upload-artifact@v1
       with:
         name: StronglyTyped.GuidIds
-        path: ./GuidIds
+        path: ./StronglyTyped.GuidIds/packed
     - name: Publish to Nuget
-      run: dotnet nuget push **/*.npkg
+      run: dotnet nuget push **/*.nupkg
         --api-key ${{ secrets.NugetKey }}
         --source ${{ secrets.NugetSource }}
